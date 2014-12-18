@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<!-- saved from url=(0050)http://getbootstrap.com/examples/jumbotron-narrow/ -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- <link rel="icon" href="http://getbootstrap.com/favicon.ico"> -->
+
+    <title>Thanksgiving Sim</title>
+
+    <!-- Bootstrap core CSS -->
+    
+	
+	<link rel="stylesheet" href="jquery-ui.css" />
+	<link rel="stylesheet" href="bootstrap.min.css" />
+	<link rel="stylesheet" href="jumbotron-narrow.css" />
+	<script src="jquery-1.11.1.js"></script>
+    <script src="jquery-ui.js"></script>
+	<script src="bootstrap.js"></script>
+</head>
+
+  <body>
+
+	
+    <div class="container" > <!--Main Container-->
+		  <header>
+			<div class="Myjumbotron">
+				<div class="container">
+					<h1>Thanksgiving Simulator</h1>
+				</div> 
+			</div> 
+		 </header>
+		 
+	  <div class="row people"><!--upper people row-->
+			<div class="col-lg-4">
+				<h4>Sister</h4>
+				<img src="image/sister_happy.jpg" class="sister_image img-rounded" alt="Person" data-toggle="tooltip" data-placement="left" title="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged." />
+			</div>
+			<div class="col-lg-4">
+				 <h4>Subheading</h4>
+				 <img src="http://lorempixel.com/output/people-q-c-200-150-5.jpg" alt="Person" />
+			</div>
+			<div class="col-lg-4">
+			    <h4>Subheading</h4>
+			    <img src="http://lorempixel.com/output/people-q-c-200-150-4.jpg" alt="Person" />
+			</div>
+      </div>
+	  
+	  <div class="row"><!--slider area container-->
+	  
+			<div class="col-lg-2 moveDown"> 
+				<div id="foodSlider" title="Food" data-toggle="tooltip" data-placement="left"></div>
+				<div id="liqSlider" title="Liq" data-toggle="tooltip" data-placement="left"> </div>
+				<div id="convoSlider" title="Convo" data-toggle="tooltip" data-placement="left"></div>
+				<button class="myClass">Advance Round</button>	
+			</div>
+			<div class="col-lg-10">
+			  <img src="image/dinner.jpg" class="main_image" alt="Food"/>
+			</div>
+	 </div>
+	 
+      <div class="row people"> <!--lower people row-->
+			<div class="col-lg-4">
+				<h4>Subheading</h4>
+				<img src="http://lorempixel.com/output/people-q-c-200-150-1.jpg" alt="Person" />
+			</div>
+			 <div class="col-lg-4">
+				<h4>Subheading</h4>
+				<img src="http://lorempixel.com/output/people-q-c-200-150-2.jpg" alt="Person" />
+			</div>
+			<div class="col-lg-4">
+				 <h4>uncle</h4>
+				 <img src="http://lorempixel.com/output/people-q-c-200-150-3.jpg" alt="Person" />
+			</div>
+     </div> 
+	 
+	  <div class="footer"> <!--footer area-->
+        <p>LMC 6313</p>
+      </div>
+	</div><!--Main Container-->
+	
+    <!--Main Javascript code Below-->
+   <script>
+         
+      //class constructor
+          function Human(food, liq, convo)
+		  {		  
+			this.food = food;
+			this.liq = liq;
+			this.convo = convo;
+			this.is_happy = [];
+			this.image = '';
+		  }
+		  
+		  //create objects
+		  var uncle = new Human();
+		  var sister = new Human();
+		   //Global variable we will use for control
+		  var current_round = 0;
+		  var total_rounds = 3;
+		  var current_round_text = ["Appetizer", "Dinner", "Dessert"];
+		  
+		  //activates the tool tip function
+		  $('img, #foodSlider, #liqSlider, #convoSlider').tooltip();
+		
+		  
+		  
+		 
+		  //Logic Functions here
+		  function logic()
+			{
+				alert("Current Round Is : " + current_round_text[current_round]);
+				
+				uncle.is_happy[current_round] = ((uncle.liq + uncle.food) > uncle.convo) == true; 
+					console.log('uncle', uncle);
+					console.log("is uncle happy: " + uncle.is_happy[current_round]);
+			
+				sister.is_happy[current_round] = ((sister.food == sister.liq) && (sister.liq == sister.convo)) ==true;
+					console.log('sister', sister);
+					console.log("is sister happy: " + sister.is_happy[current_round]);
+					sister.image = (sister.is_happy[current_round]) ? 'image/sister_happy.jpg' : 'image/sister_sad.jpg'; //Returns one of two expressions depending on a condition. test ? expression1 : expression2
+					$('.sister_image').attr('src', sister.image); //targets the sister class src attribute, changes it with sister.image variable
+				
+			current_round++;
+			}
+			
+			//this function is ran after each round
+			function tally()
+			{	
+				console.log("entire sister array:" + sister.is_happy); 
+				console.log("entire uncle array:" + uncle.is_happy);
+				var count = 0;
+				for (var i = 0; i < total_rounds; i++) 
+				{
+					if (uncle.is_happy[i])
+						{
+							count++;
+					    }
+					if (sister.is_happy[i])
+						{
+							count++;
+					   }
+				}
+				//code to decide if good ending or bad ending here
+				var main_image = (count > 4)  ? 'image/good_ending.jpg' : 'image/bad_ending.jpg'; //first is for true, second is for false
+				$('.main_image').attr('src', main_image);
+				console.log("final count is:" + count);
+				setTimeout("alert(\"Page will Reload in 5 Seconds\")", 1000);
+				setTimeout("location.reload(true)",4000);
+				
+			  
+			}
+			
+			//Round advancement button. Controls launch of tally and logic functions. Increments the current round variable as well.
+			$('.myClass').click(function(){
+			
+                sister.food = $("#foodSlider").slider("value");
+				sister.liq = $("#liqSlider").slider("value");
+				sister.convo = $("#convoSlider").slider("value");
+				
+				uncle.food = $("#foodSlider").slider("value");
+				uncle.liq = $("#liqSlider").slider("value");
+				uncle.convo = $("#convoSlider").slider("value");
+				
+				//logic to advance rounds and increment round variable
+				if (current_round == 2) 
+					{
+						
+						logic();
+						alert("Dinner is over!!!");
+						tally();
+						 $(".myClass").attr("disabled",true);
+					}
+				else
+					{
+						logic();
+						
+					}
+				});
+
+			//Create Sliders here
+			$('#foodSlider').slider({
+			    orientation: "vertical", 
+				max: 3,
+				min: 1,
+				value: 1,
+				step: 1,	
+			});
+
+			$('#convoSlider').slider({
+			    orientation: "vertical", 
+				max: 3,
+				min: 1,
+				value: 1,
+				step: 1,
+			});
+
+			$('#liqSlider').slider({
+				orientation: "vertical", 
+				max: 3, 
+				min: 1, 
+				value: 1,
+				step: 1,
+			});
+    </script>
+
+</body></html>

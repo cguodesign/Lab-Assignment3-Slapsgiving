@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<!-- saved from url=(0050)http://getbootstrap.com/examples/jumbotron-narrow/ -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- <link rel="icon" href="http://getbootstrap.com/favicon.ico"> -->
+
+    <title>Thanksgiving Sim - Slapsgiving</title>
+
+    <!-- Bootstrap core CSS -->
+    
+	
+	<link rel="stylesheet" href="jquery-ui.css" />
+	<link rel="stylesheet" href="bootstrap.min.css" />
+	<link rel="stylesheet" href="jumbotron-narrow.css" />
+	<script src="jquery-1.11.1.js"></script>
+    <script src="jquery-ui.js"></script>
+	<script src="bootstrap.js"></script>
+</head>
+
+  <body>
+
+	
+    <div class="container" > <!--Main Container-->
+		  <header>
+			<div class="Myjumbotron">
+				<div class="container">
+					<img src="head.jpg">
+				</div> 
+			</div> 
+		 </header>
+		 
+	  <div class="row people"><!--upper people row-->
+			<div class="col-lg-4">
+				<h4>Robin</h4>
+				<figure>
+					<img src="image/robin.png" class="robin_image img-rounded" alt="Person" data-toggle="tooltip" data-placement="left" title="She is a Scotch-drinking, cigar-smoking, gun-toting Canadian pop-star-turned-journalist-turned-morning-show-host. Robin befriended the gang in 2005 after an awkward date with Ted Mosby." />
+					
+				<figure>
+			</div>
+			<div class="col-lg-4">
+				 <h4>Barney</h4>
+				 <img src="image/barney.jpg" class="barney_image img-rounded" alt="Person" data-toggle="tooltip" data-placement="left" title="Since meeting him, he has been a big part of the gang and believes he's Ted's best friend. Before slowly wanting to settle down, he was a serial womanizer who could not stand the idea of commitment and would do extremely elaborate acts and lies purely to sleep with other women. His unique personality and elaborate techniques for seducing women are a constant source of humor (typically for Marshall), amazement (typically for Ted), and disgust (typically for Lily) to the rest of the group. " />
+			</div>
+			<div class="col-lg-4">
+			    <h4>The Mother</h4>
+			    <img src="image/mother.jpg" class="mother_image img-rounded" alt="Person" data-toggle="tooltip" data-placement="left" title="We know nothing about her" />
+			</div>
+      </div>
+	  
+	  <div class="row people"> <!--lower people row-->
+			<div class="col-lg-4">
+				<h4>Ted</h4>
+				<img src="image/ted.jpg" class="ted_image img-rounded" alt="Person" data-toggle="tooltip" data-placement="left" title="Beginning in 2005, Ted's meandering journey has taken him through many failed relationships, including being left at the altar. But the architect-turned-professor isn't giving up on his search for the perfect woman. She's out there, and each episode of Ted's life brings him one step closer to meeting her." />
+			</div>
+			 <div class="col-lg-4">
+				<h4>Marshall</h4>
+				<img src="image/marshall.jpg" class="marshall_image img-rounded" alt="Person" data-toggle="tooltip" data-placement="left" title="He is currently married to the love of his life and fellow Wesleyan alum, Lily Aldrin. Brought up in the tightly-knit community of St. Cloud, Minnesota, Marshall's inherent kindness makes him the most compassionate member of the gang. He has recently quit his job as a corporate lawyer at Goliath National Bank to pursue his dream of saving the world through environmental law. " />
+			</div>
+			<div class="col-lg-4">
+				 <h4>Lily</h4>
+				 <img src="image/lily.jpg" class="lily_image img-rounded" alt="Person" data-toggle="tooltip" data-placement="left" title="She is the wife of Marshall Eriksen and the best friend of Robin Scherbatsky, as well as one of Ted Mosby's closest friends, having known him and Marshall since college. She currently works as an art consultant to The Captain, having formerly been a kindergarten teacher. She is also an amateur painter. She is virtually incapable of keeping secrets, with a few exceptions." />
+			</div>
+     </div> 
+
+	  <div class="row"><!--slider area container-->
+			<div class="col-lg-2"> 
+				<div id="foodSlider" title="Food" data-toggle="tooltip" data-placement="left"></div>
+				<div id="liqSlider" title="Liq" data-toggle="tooltip" data-placement="left"> </div>
+				<div id="convoSlider" title="Convo" data-toggle="tooltip" data-placement="left"></div>
+				<button class="btn btn-success myClass">Advance Round</button>
+					
+			</div>
+			
+			<div class="col-lg-10">
+			  <img src="image/dinner.jpg" class="main_image" alt="Food">
+			  <!--<button class="myClass">Get!</button> -->
+			  
+			</div>
+	 </div>
+	 
+      
+	 
+	  <div class="footer"> <!--footer area-->
+        <p>LMC 6313 | Lab Assignment 3 | Slapsgiving | Chong (Chester) Guo | <a href="mailto:cguo65@gatech.com">cguo65@gatech.edu</a></p>
+      </div>
+	</div><!--Main Container-->
+	
+    <!--Main Javascript code Below-->
+   <script>
+         
+		 //activates the tool tip function
+		$('img, #foodSlider, #liqSlider, #convoSlider').tooltip()
+	
+      //class constructor
+          function Human(food, liq, convo)
+		  {		  
+			this.food = food;
+			this.liq = liq;
+			this.convo = convo;
+			this.is_happy = [];
+			this.image = 'happy.jpg';
+		  }
+		
+		  //create objects
+		  var endingSlaps = false;
+		  var endingHappy = false;
+		  var endingMother = false;
+		  var endingUnhappy = false;
+
+		  var slaps = 0;
+		  var tedsAlcohol = 0;
+
+		  var barney = new Human(0,0,0);
+		  var robin = new Human(0,0,0);
+		  var lily = new Human(0,0,0);
+		  var marshall = new Human(0,0,0);
+		  var ted = new Human(0,0,0);
+		  var mother = new Human(0,0,0);
+		  
+		  //Global variable we will use for control
+		  var current_round = 0;
+		  var total_rounds = 3;
+		  var current_round_text = ["Appetizer", "Dinner", "Dessert"];
+		  
+		  //Logic Functions here
+		  function logic()
+			{
+				alert("Current Round Is : " + current_round_text[current_round]);
+				barney.is_happy[current_round] = ((barney.liq == 3));
+					barney.image = (barney.is_happy[current_round]) ? 'image/barney_happy.jpg' : 'image/barney_sad.jpg';
+					console.log('barney', barney);
+					$('.barney_image').attr('src', barney.image);
+					//console.log("is barney happy: " + barney.is_happy[current_round]);
+			
+				robin.is_happy[current_round] = ((robin.liq > robin.convo));
+					console.log('robin', robin);
+					//console.log("is robin happy: " + robin.is_happy[current_round]);
+					robin.image = (robin.is_happy[current_round]) ? 'image/robin_happy.jpg' : 'image/robin_sad.jpg';
+					$('.robin_image').attr('src', robin.image);
+
+				ted.is_happy[current_round] = ((ted.food == ted.liq) && (ted.liq == ted.convo));
+					console.log('ted', ted);
+					//console.log("is ted happy: " + ted.is_happy[current_round]);
+					ted.image = (ted.is_happy[current_round]) ? 'image/ted_happy.jpg' : 'image/ted_sad.jpg';
+					$('.ted_image').attr('src', ted.image);
+
+				lily.is_happy[current_round] = ((lily.food < lily.liq));
+					console.log('lily', lily);
+					//console.log("is lily happy: " + lily.is_happy[current_round]);
+					lily.image = (lily.is_happy[current_round]) ? 'image/lily_happy.jpg' : 'image/lily_sad.jpg';
+					$('.lily_image').attr('src', lily.image);
+
+				marshall.is_happy[current_round] = ((marshall.convo == marshall.liq) && (lily.is_happy[current_round]));
+					console.log('marshall', marshall);
+					//console.log("is marshall happy: " + marshall.is_happy[current_round]);
+					marshall.image = (marshall.is_happy[current_round]) ? 'image/marshall_happy.jpg' : 'image/marshall_sad.jpg';
+					$('.marshall_image').attr('src', marshall.image);
+
+				tedsAlcohol += ted.liq;
+				slaps = (marshall.liq * 0.33) - ( barney.convo * 0.33);
+				console.log("tedsAlcohol round " + current_round + " is " + tedsAlcohol);
+				console.log("slaps round " + current_round + " is " + slaps);
+			current_round++;
+			}
+			
+			//this function is ran after each round
+			function tally()
+			{	
+				console.log("entire robin array:" + robin.is_happy); 
+				console.log("entire barney array:" + barney.is_happy);
+				console.log("entire ted array:" + ted.is_happy);
+				console.log("entire lily array:" + lily.is_happy);
+				console.log("entire marshall array:" + marshall.is_happy);
+				var count = 0;
+				
+				for (var i = 0; i < total_rounds; i++) 
+				{
+					if (barney.is_happy[i])
+						{
+							count++;
+					    };
+					if (robin.is_happy[i])
+						{
+							count++;
+					   };
+					if (barney.is_happy[i])
+						{
+							count++;
+					   };
+					if (lily.is_happy[i])
+						{
+							count++;
+					   };
+					if (marshall.is_happy[i])
+						{
+							count++;
+					   };
+					
+				}
+
+				if ( tedsAlcohol === 9){
+					endingMother = true;
+				}else if (slaps > 0){
+					endingSlaps = true;
+				}else{
+					if ( count >= 10 ){
+						endingHappy = true;
+					}else if ( count < 10){
+						endingUnhappy = true;
+				}
+
+				}
+				//code to decide if good ending or bad ending here
+				//var main_image = (count > 2)  ? 'image/good_ending.jpg' : 'image/bad_ending.jpg'; //first is for true, second is for false
+
+				if (endingMother === true || endingSlaps === true){
+					if (endingMother === true && endingSlaps === true){
+						main_image = 'image/ending_findthemother.jpg';	
+						mother.image = 'image/mother_real.jpg';
+						$('.mother_image').attr('src', mother.image);
+						alert("Ted found the mother!!!");
+					}else if(endingMother === true && endingSlaps === false){
+						main_image = 'image/ending_findthemother.jpg';
+						mother.image = 'image/mother_real.jpg';
+						$('.mother_image').attr('src', mother.image);
+						alert("Ted found the mother!!!");
+					}else if(endingMother === false && endingSlaps === true){
+						main_image = 'image/ending_slap.jpg';
+						alert("Barney got a slap!!!");
+					}
+				}else{
+					if (endingHappy === true){
+						main_image = 'image/ending_happy.jpg';
+						alert("Everyone is happy!!!");
+					}else if ( endingUnhappy = true){
+						main_image = 'image/ending_unhappy.jpg';
+						alert("Everyone is sad!!!");
+					}
+				}
+				$('.main_image').attr('src', main_image);
+				console.log("final count is:" + count);
+				setTimeout("alert(\"Page will Reload in 5 Seconds\")", 1000);
+				setTimeout("location.reload(true)",4000);
+				
+			  
+			}
+			
+			//Round advancement button. Controls launch of tally and logic functions. Increments the current round variable as well.
+			$('.btn-success').click(function(){
+			
+                robin.food = $("#foodSlider").slider("value");
+				robin.liq = $("#liqSlider").slider("value");
+				robin.convo = $("#convoSlider").slider("value");
+				
+				barney.food = $("#foodSlider").slider("value");
+				barney.liq = $("#liqSlider").slider("value");
+				barney.convo = $("#convoSlider").slider("value");
+
+				lily.food = $("#foodSlider").slider("value");
+				lily.liq = $("#liqSlider").slider("value");
+				lily.convo = $("#convoSlider").slider("value");
+
+				marshall.food = $("#foodSlider").slider("value");
+				marshall.liq = $("#liqSlider").slider("value");
+				marshall.convo = $("#convoSlider").slider("value");
+
+				ted.food = $("#foodSlider").slider("value");
+				ted.liq = $("#liqSlider").slider("value");
+				ted.convo = $("#convoSlider").slider("value");
+				
+				//logic to advance rounds and increment round variable
+				if (current_round == 2) 
+					{
+						logic();
+						alert("Dinner is over!!!");
+						tally();
+						 $(".btn-success").attr("disabled",true);
+					}
+				else
+					{
+						logic();
+						
+					}
+				});
+
+			//Create Sliders here
+			$('#foodSlider').slider({
+			    orientation: "vertical", 
+				max: 3,
+				min: 1,
+				value: 1,
+				step: 1,	
+			});
+
+			$('#convoSlider').slider({
+			    orientation: "vertical", 
+				max: 3,
+				min: 1,
+				value: 1,
+				step: 1,
+			});
+
+			$('#liqSlider').slider({
+				orientation: "vertical", 
+				max: 3, 
+				min: 1, 
+				value: 1,
+				step: 1,
+			});
+    </script>
+    <!--
+    Code Logic:
+
+    Barney:       happy = alcohol * 100% [3]
+               -slaps = conversation * 33 % [-3, -1]
+
+	Robin: happy = alcohol > conversation 
+
+	Lily: happy = food < conversation 
+
+	Marshall: happy = lily’s happy  and  convocation = food
+	               +slaps = alcohol * 33 [1, 3]
+
+	Ted:  happy = (alcohol = conversation =  food )
+
+	happy ending : happy count >= 10
+	sad ending: happy count < 10
+	slap ending: slaps > 0;
+	mother ending:  Ted's alcohol = 9 : find the mother!
+	-->
+</body></html>

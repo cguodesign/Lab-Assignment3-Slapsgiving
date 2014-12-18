@@ -1,0 +1,139 @@
+/* Space out content a bit */
+body {
+  padding-top: 20px;
+  padding-bottom: 20px;
+ /*background-image: url("http://thumbs.dreamstime.com/z/thanksgiving-background-cooked-turkey-vector-34655625.jpg");*/
+  background-image: url("bg.jpg");  
+	background-repeat: repeat;
+	
+}
+
+.header,
+.footer,
+.Myjumbotron{
+  padding-right: 15px;
+  padding-left: 15px;
+  text-align: center;
+}
+
+.Myrow{
+padding-top: 80px;
+}
+#liqSlider,
+#foodSlider,
+#convoSlider{
+display: inline-block;
+ margin:8px;
+ height: 20em;
+ left: 8px;
+}
+
+.moveDown{
+	top: 70px;
+}
+
+.main_image{
+  margin-top: 20px;
+  border-radius: 30px;
+  width: 500px;
+  border-radius: 20px;
+  border-style: solid;
+  border-width: 5px;
+  border-color: white;
+}
+
+/* Custom page header */
+.header {
+  
+}
+/* Make the masthead heading the same height as the navigation */
+.header h3 {
+  padding-bottom: 19px;
+  margin-top: 0;
+  margin-bottom: 0;
+  line-height: 40px;
+}
+
+/* Custom page footer */
+.footer {
+
+
+  padding-top: 19px;
+  color: #777;
+  
+}
+
+/* Customize container */
+@media (min-width: 768px) {
+  .container {
+    max-width: 930px;
+  }
+}
+.container-narrow > hr {
+  margin: 30px 0;
+}
+
+/* Main people message and sign up button */
+.jumbotron {
+  text-align: center;
+
+}
+.jumbotron .btn {
+  padding: 14px 24px;
+  font-size: 21px;
+  position: center;
+  text-align: center;
+  
+}
+
+/* Supporting people content */
+.people {
+  margin: 10px 0;
+}
+.people p + h4 {
+  margin-top: 10px;
+}
+
+.img-rounded {
+  border-radius: 20px;
+  border-style: solid;
+  border-width: 5px;
+  border-color: white;
+  width: 200px;
+  height: 150px;
+
+}
+
+h4 {
+  color:#ffffff;
+}
+
+/* Responsive: Portrait tablets and up */
+@media screen and (min-width: 768px) {
+  /* Remove the padding we set earlier */
+  .header,
+  .people,
+  .footer {
+    padding-right: 0;
+    padding-left: 0;
+  }
+  /* Space out the masthead */
+  .header {
+    margin-bottom: 30px;
+  }
+  /* Remove the bottom border on the jumbotron for visual effect */
+  .jumbotron {
+    border-bottom: 0;
+  }
+}
+
+.Myjumbotron img{
+  width: 300px;
+}
+
+.myClass{
+	position: center;
+	text-align: center;
+
+	}
+

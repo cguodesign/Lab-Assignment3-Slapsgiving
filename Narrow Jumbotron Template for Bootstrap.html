@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<!-- saved from url=(0050)http://getbootstrap.com/examples/jumbotron-narrow/ -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- <link rel="icon" href="http://getbootstrap.com/favicon.ico"> -->
+
+    <title>Thanksgiving Sim</title>
+
+    <!-- Bootstrap core CSS -->
+    
+	
+	<link rel="stylesheet" href="jquery-ui-1.10.1.custom.min.css" />
+	<link rel="stylesheet" href="bootstrap.min.css" />
+	<link rel="stylesheet" href="jumbotron-narrow.css" />
+	<script src="jquery-1.9.1.js"></script>
+    <script src="jquery-ui-1.10.1.custom.min.js"></script>
+</head>
+
+  <body>
+
+    <div class="container"> <!--Main Container-->
+		  <header>
+			<div class="Myjumbotron">
+				<div class="container">
+					<h1>Thanksgiving Simulator</h1>
+				</div> 
+			</div> 
+		 </header>
+		 
+	  <div class="row people"><!--upper people row-->
+			<div class="col-lg-4">
+				<h4>Subheading</h4>
+				<figure>
+					<img src="image/sister_happy.jpg" class="sister_image" alt="Person" />
+					<figcaption><p> "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged."</p></figcaption>
+				<figure>
+			</div>
+			<div class="col-lg-4">
+				 <h4>Subheading</h4>
+				 <img src="http://lorempixel.com/output/people-q-c-200-150-5.jpg" alt="Person" />
+			</div>
+			<div class="col-lg-4">
+			    <h4>Subheading</h4>
+			    <img src="http://lorempixel.com/output/people-q-c-200-150-4.jpg" alt="Person" />
+			</div>
+      </div>
+	  
+	  <div class="row"><!--slider area container-->
+			<div class="col-lg-4"> 
+				<div id="foodSlider"></div>
+				<div id="liqSlider"></div>
+				<div id="convoSlider"></div>
+				
+			</div>
+			<div class="col-lg-8">
+			  <img src="image/dinner.jpg" class="img-thumbnail" alt="Food">
+			  <!--<button class="myClass">Get!</button> -->
+			  <p><a class="btn btn-lg btn-success myClass">Sign up today</a></p>
+			</div>
+	 </div>
+	 
+      <div class="row people"> <!--lower people row-->
+			<div class="col-lg-4">
+				<h4>Subheading</h4>
+				<img src="http://lorempixel.com/output/people-q-c-200-150-1.jpg" alt="Person" />
+			</div>
+			 <div class="col-lg-4">
+				<h4>Subheading</h4>
+				<img src="http://lorempixel.com/output/people-q-c-200-150-2.jpg" alt="Person" />
+			</div>
+			<div class="col-lg-4">
+				 <h4>Subheading</h4>
+				 <img src="http://lorempixel.com/output/people-q-c-200-150-3.jpg" alt="Person" />
+			</div>
+     </div> 
+	 
+	  <div class="footer"> <!--footer area-->
+        <p>LMC 6313</p>
+      </div>
+	</div><!--Main Container-->
+	
+    <!--Main Javascript code Below-->
+   <script>
+   
+	
+      //class constructor
+          function Human(food, liq, convo)
+		  {		  
+			this.food = food;
+			this.liq = liq;
+			this.convo = convo;
+			this.is_happy = [];
+			this.image = 'happy.jpg';
+		  }
+		
+		  //create objects
+		  var uncle = new Human(0,0,0);
+		  var sister = new Human(0,0,0);
+		  
+		  //Global variable we will use for control
+		  var current_round = 0;
+		  var total_rounds = 3;
+		  
+		  
+		  //Logic Functions here
+		  function logic()
+			{
+				uncle.is_happy[current_round] = ((uncle.liq + uncle.food) <= uncle.convo);
+				//uncle.image = (uncle.is_happy[current_round]) ? 'image/uncle_happy.jpg' : 'image/uncle_sad.jpg';
+				//$('.uncle_image').attr('src', uncle.image);
+				
+					//console.log("is uncle happy round: " + uncle.is_happy[current_round]);
+				sister.is_happy[current_round] = (sister.food == sister.liq == sister.convo);
+				
+							console.log("is sister happy: " + sister.is_happy[current_round]);
+							sister.image = (sister.is_happy[current_round]) ? 'image/sister_happy.jpg' : 'image/sister_sad.jpg';
+							$('.sister_image').attr('src', sister.image);
+				//console.log("current round is: " + current_round);
+				
+				
+				current_round++;
+				
+			
+			}
+			
+			
+			//this function is ran after each round
+			
+			function tally()
+			{	
+				
+				console.log("entire sister array:" + sister.is_happy); 
+				console.log("entire uncle array:" + uncle.is_happy);
+				var count = 0;
+				for (var i = 0; i < total_rounds; i++) 
+				{
+					if (uncle.is_happy[i])
+						{
+						//console.log(uncle.is_happy[i]);
+					   count++;
+					   }
+					if (sister.is_happy[i])
+						{
+						console.log("arrary loop:  " + sister.is_happy[i]);
+						count++;
+					   }
+				}
+				//var main_image = (logic - truth ) ? 'image/main_happy.jpg' : 'image/main_sad.jpg';
+				//$('.main_image').attr('src', main_image);
+				console.log("final count is:" + count);
+				return count;
+					
+			}
+			
+			//Round advancement button. Controls launch of tally and logic functions. Increments the current round variable as well.
+			$('.btn-success').click(function(){
+			
+					
+                sister.food = $("#foodSlider").slider("value");
+				sister.liq = $("#liqSlider").slider("value");
+				sister.convo = $("#convoSlider").slider("value");
+				if (current_round == 2) 
+					{
+					alert("current round is:" + current_round);
+					logic();
+					tally();
+					}
+				else
+					{
+					logic();
+					alert("logic: " + current_round);
+					}
+				});
+
+			//Create Sliders. Set event handling 
+			$('#foodSlider').slider({
+			    orientation: "vertical", 
+				max: 3,
+				min: 1,
+				step: 1
+				
+				change:function(event, ui) {
+					 uncle.food = ui.value;
+					 sister.food = ui.value;
+					 console.log("food is:  " + ui.value);
+				}
+				
+				
+				
+			});
+
+			$('#convoSlider').slider({
+			    orientation: "vertical", 
+				max: 3,
+				min: 1,
+				step: 1,
+				
+				change:function(event, ui) {
+					 uncle.convo = ui.value;
+					 sister.convo = ui.value;
+					 console.log("convo is:  " + ui.value);
+				}
+			
+				
+				
+			});
+
+			$('#liqSlider').slider({
+				orientation: "vertical", 
+				max: 3, 
+				min: 1, 
+				step: 1,
+				
+				change:function(event, ui) {
+					 uncle.liq = ui.value;
+					 sister.liq = ui.value;
+					 console.log("liq is:  " + ui.value);
+				}
+				
+				
+			});
+		   
+		   
+		 
+		
+    </script>
+
+</body></html>
